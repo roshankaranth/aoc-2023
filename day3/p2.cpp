@@ -5,11 +5,15 @@ int main(){
 
     ifstream in("input.txt");
     string str;
-    
+    vector<string> vstr;
 
-    
-    int sum=0;
-    for(int i = 0 ; i< str.size();i++){
+    for(int i = 0 ; getline(in,str); i++){
+        vstr.push_back(str);
+    }
+
+    long long sum=0;
+    vector<pair<int,pair<int,int>>> data;
+    for(int i = 0 ; i< vstr.size();i++){
         int number = 0;
         int flag = 0;
         
@@ -26,8 +30,7 @@ int main(){
                 
             }
             
-
-            if((vstr[i][j]<48 || vstr[i][j]>57)  && number!=0){
+            if((vstr[i][j]<48 || vstr[i][j]>57 || vstr[i][j+1] == '\0')  && number!=0){
                 
                 if(start==-1){
                     start = 0;
@@ -36,18 +39,25 @@ int main(){
                 if(end==vstr[i].size()){
                     end = vstr[i].size()-1;
                 }
-                
                 while(start<=end){
                     for(int k = -1 ; k <=1 ; k++){
                         if((i==0 && k==-1) || (i==vstr.size()-1 && k==1)){
                             continue;
                         }
-                        if((vstr[i+k][start]<48 || vstr[i+k][start]>57) && vstr[i+k][start]!='.'){
-                            cout<<number<<"\n";
-                            sum += number;
-                            start = 1, end=0;
-                            break;
+                        //cout<<vstr[i+k][start];
+                        if(vstr[i+k][start] == '*' && vstr[i+k][start]!='.'){
+                            for(int l = 0 ; l < data.size();l++){
+                                if(data[l].second.first == i+k && data[l].second.second == start){
+                                    sum+= number*data[l].first;
+                                    
+                                    //cout<<sum;
+                                }
+                            }
+                            data.push_back({number,{i+k,start}});
+
+                            
                         }
+                        
                     }
                     start++;
                 }
