@@ -3,19 +3,38 @@ using namespace std;
 
 int word(string digit){
 
-    switch(digit){
+    
 
-        case "zero":return 0;
-        case "one":return 1;
-        case "two":return 2;
-        case "three":return 3;
-        case "four":return 4;
-        case "five":return 5;
-        case "six":return 6;
-        case "seven":return 7;
-        case "eight":return 8;
-        case "nine":return 9;
-    }
+        if(digit=="one"){
+            return 1;
+        }
+        if(digit=="two"){
+            return 2;
+        }
+        if(digit=="three"){
+            return 3;
+        }
+        if(digit=="four"){
+            return 4;
+        }
+        if(digit=="five"){
+            return 5;
+        }
+        if(digit=="six"){
+            return 6;
+        }if(digit=="seven"){
+            return 7;
+        }if(digit=="eight"){
+            return 8;
+        }if(digit=="nine"){
+            return 9;
+        }if(digit=="zero"){
+            return 0;
+        }
+
+    return 0;
+
+    
 }
 
 int main(){
@@ -37,7 +56,17 @@ int main(){
         string digit;
         for(int j = 0 ; j < vstr[i].size(); j ++){
 
-            ///INCOMPLETE!
+            for(int k = 3 ; k <= 5 ; k++){
+                if(vstr[i].compare(j,k,"one")==0||vstr[i].compare(j,k,"two")==0||vstr[i].compare(j,k,"three")==0||vstr[i].compare(j,k,"four")==0||vstr[i].compare(j,k,"five")==0||vstr[i].compare(j,k,"six")==0||vstr[i].compare(j,k,"seven")==0||vstr[i].compare(j,k,"eight")==0||vstr[i].compare(j,k,"nine")==0||vstr[i].compare(j,k,"zero")==0){
+                    if(flag==0){
+                        starting = word(vstr[i].substr(j,k));
+                        flag=1;
+                        
+                    }
+
+                    ending = word(vstr[i].substr(j,k));
+                }
+            }
 
             //Getting number;
             if(vstr[i][j]>=48 && vstr[i][j]<=57){
